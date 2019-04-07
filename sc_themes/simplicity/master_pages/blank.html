@@ -1,0 +1,60 @@
+{style}
+	{literal}
+		body,html {background:#fff;min-width:0; height: 100%;}
+		.sc_page_wrap {
+			background: none;
+		}
+		.sc_footer {
+			background: none;
+			border: none;
+		    clear: both;
+		    height: 96px;
+		    margin-top: -99px;
+		    padding: 1px 0;
+		    position: relative;		
+    	}
+		.sc_footer .sc_canvas {
+		    margin: 0 auto;
+		    width: 996px;
+		    word-wrap: break-word;
+		    background: none;
+		}
+		.sc_footer .sc_page {
+		    margin: 0 0 0 auto;
+		    padding: 0 18px;
+		    background: none;
+		}
+		.sc_sign_in_cont {
+			position: relative;
+		}
+		body > .sc_page_wrap {
+		     min-height: 100%;
+		     position: relative;
+		}
+		.sc_page_padding {
+		     padding-bottom: 99px;
+		     background: none;
+		}
+	{/literal}
+{/style}
+<div class="sc_page_wrap">
+	<div class="sc_page_padding">
+		{$content}
+	</div>
+</div>
+<div class="sc_footer">
+	<div class="sc_canvas">
+		<div class="sc_page clearfix">
+			<div style="float:right;padding-bottom: 30px;">
+				{$bottomPoweredByLink}
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$('.sc_sign_up').after($('.sc_sign_in'));
+	$('<div class="clearfix"></div>').appendTo($('.sc_sign_in'));
+	$('.sc_sign_in > .clearfix').append($('.sc_form_options .sc_button'));
+	$('.sc_sign_in > .clearfix').append($('.sc_sign_up p:last-child a'));
+	$('.sc_sign_in > .clearfix').after($('.sc_connect_buttons .clearfix'));
+</script>

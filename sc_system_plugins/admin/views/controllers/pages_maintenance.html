@@ -1,0 +1,50 @@
+<div class="sc_stdmargin">
+{form name='maintenance'}
+<table class="sc_table_1 sc_form">
+    <tr class="sc_tr_first">
+        <th class="sc_name sc_txtleft" colspan="3">
+            <span class="sc_section_icon sc_ic_gear_wheel">{text key="admin+maintenance_section_label"}</span>
+        </th>
+    </tr>
+    <tr class="{cycle values='sc_alt2,sc_alt1'}">
+		<td class="sc_label">{label name='maintenance_enable'}</td>
+		<td class="sc_value">{input name='maintenance_enable'}</td>
+		<td class="sc_desc">{desc name='maintenance_enable'}</td>
+	</tr>
+	<tr class="{cycle values='sc_alt2,sc_alt1'} sc_tr_last">
+		<td class="sc_label">{label name='maintenance_text'}</td>
+		<td class="sc_value">{input name='maintenance_text'}</td>
+		<td class="sc_desc">{desc name='maintenance_text'}</td>
+	</tr>
+</table>
+
+<table class="sc_table_1 sc_form">
+    <tr class="sc_tr_first">
+        <th class="sc_name sc_txtleft" colspan="3">
+            <span class="sc_section_icon sc_ic_gear_wheel">{text key="admin+splash_screen_section_label"}</span>
+        </th>
+    </tr>
+    <tr class="{cycle values='sc_alt2,sc_alt1'}">
+		<td class="sc_label">{label name='splash_screen'}</td>
+		<td class="sc_value">{input name='splash_screen'}</td>
+		<td class="sc_desc">{desc name='splash_screen'}</td>
+	</tr>
+	<tr class="{cycle values='sc_alt2,sc_alt1'}">
+		<td class="sc_label">{label name='intro'}</td>
+		<td class="sc_value">{input name='intro'}</td>
+		<td class="sc_desc">{desc name='intro'}</td>
+	</tr>
+	<tr class="{cycle values='sc_alt2,sc_alt1'}">
+		<td class="sc_label">{label name='button_label'}</td>
+		<td class="sc_value">{input name='button_label'}</td>
+		<td class="sc_desc">{desc name='button_label'}</td>
+	</tr>
+	<tr class="{cycle values='sc_alt2,sc_alt1'} sc_tr_last">
+		<td class="sc_label">{label name='leave_url'}</td>
+        <td class="sc_value">{input name='leave_url'}</td>
+		<td class="sc_desc sc_small">{desc name='leave_url'}</td>
+	</tr>
+</table>
+<div class="clearfix"><div class="sc_right">{submit name='save' class='sc_button sc_ic_save sc_positive'}</div></div>
+{/form}
+</div>

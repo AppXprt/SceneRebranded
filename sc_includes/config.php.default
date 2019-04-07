@@ -1,0 +1,22 @@
+<?php
+
+define('SC_DIR_USERFILES', SC_DIR_ROOT.'sc_userfiles'.DS);
+define('SC_DIR_STATIC', SC_DIR_ROOT.'sc_static'.DS);
+define('SC_DIR_PLUGINFILES', SC_DIR_ROOT.'sc_pluginfiles/');
+ 
+define('SC_DEBUG_MODE', false);
+define('SC_DEV_MODE', false);
+define('SC_INSTALL_PLUGINS', false);
+define('SC_PASSWORD_SALT', 'scene_salt_SK750');
+define('SC_PROFILER_ENABLE', false);
+ 
+define('SC_DIR_CORE', SC_DIR_ROOT.'sc_core'.DS);
+define('SC_DIR_INC', SC_DIR_ROOT.'sc_includes'.DS);
+define('SC_DIR_LIB', SC_DIR_ROOT.'sc_libraries'.DS);
+define('SC_DIR_UTIL', SC_DIR_ROOT.'sc_utilities'.DS);
+define('SC_DIR_PLUGIN', SC_DIR_ROOT.'sc_plugins'.DS);
+define('SC_DIR_THEME', SC_DIR_ROOT.'sc_themes'.DS);
+define('SC_DIR_SYSTEM_PLUGIN', SC_DIR_ROOT.'sc_system_plugins'.DS);
+define('SC_DIR_SMARTY', SC_DIR_ROOT.'sc_smarty'.DS);
+ 
+define('SC_USE_CLOUDFILES', false);

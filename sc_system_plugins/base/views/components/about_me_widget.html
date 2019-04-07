@@ -1,0 +1,29 @@
+{style}
+{literal}
+
+.sc_about_me_widget {
+    padding: 5px 4px 10px;
+    overflow: hidden;
+}
+
+{/literal}
+{/style}
+
+
+<div class="sc_highbox sc_about_me_widget">
+    {if $ownerMode}
+        <div class="sc_center">
+            {form name="about_me_form"}
+                <div class="form_auto_click"> 
+                    <div class="sc_smallmargin">{input name="about_me"}</div>
+                    <div class="{if $noContent}sc_submit_auto_click{/if}">
+                        {submit name="save"}
+                    </div>
+                </div>
+            {/form}
+        </div>
+    {else if $contentText}
+            {$contentText}
+    {/if}
+
+</div>

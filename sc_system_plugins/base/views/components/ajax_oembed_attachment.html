@@ -1,0 +1,188 @@
+{style}{literal}
+.sc_oembed_attachment {
+    position: relative;
+    padding-right: 20px;
+    margin-bottom: 4px;
+}
+
+.sc_oembed_attachment .two_column  .attachment_left {
+    float: left;
+    max-width: 150px;
+    margin-right: 8px;
+}
+
+.sc_oembed_attachment .two_column .attachment_right {
+    display: inline-block;
+}
+
+.sc_oembed_attachment .video div.attachment_left {
+    position: relative;
+}
+
+.sc_oembed_attachment .video div.attachment_right {
+    display: inline-block;
+}
+
+.sc_oembed_attachment .one_column .attachment_left {
+    display: none;
+}
+
+.sc_oembed_attachment .attachment_left img
+{
+    width: 100%;
+    height: auto;
+    max-width: none;
+}
+
+.sc_oembed_attachment .attachment_left embed,
+.sc_oembed_attachment .attachment_left object,
+.sc_oembed_attachment .attachment_left iframe
+{
+    width: 300px;
+    height: 220px;
+}
+
+.sc_oembed_attachment:hover .attachment_delete {
+    display: block;
+}
+
+.attachment_delete {
+    position: absolute;
+    right: 0;
+    width:12px;
+    height:12px;
+    display: none;
+}
+.sc_oembed_attachment .link.two_column,
+.sc_oembed_attachment .video.two_column {
+    padding-left: 108px;
+}
+
+.sc_oembed_attachment .video.two_column.sc_video_playing {
+    padding-left: 0;
+}
+.sc_oembed_attachment .link.two_column .attachment_left,
+.sc_oembed_attachment .video.two_column .attachment_left {
+    max-width: 100px;
+    margin-left: -108px;
+    margin-top: 4px;
+}
+.sc_oembed_attachment .video.two_column.sc_video_playing .attachment_left {
+    margin: 0 0 4px 0;
+    width: 100%;
+    max-width: none;
+}
+.sc_oembed_attachment .link .sc_oembed_video_cover {
+    display: none;
+}
+{/literal}{/style}
+
+{*
+<div class="sc_ajax_oembed_attachment sc_oembed_attachment sc_border clearfix {if !empty($containerClass)}{$containerClass}{/if}" id="{$uniqId}">
+
+    <a class="attachment_delete SC_AttachmentDelete sc_miniic_delete {if !empty($deleteClass)}{$deleteClass}{/if}" href="javascript://"></a>
+
+    <div style="padding-right: 20px;">
+        <div class="{$data.type} {if !empty($data.thumbnail_url) || !empty($data.url)}has_thumbnail{elseif !empty($data.html)}has_html{/if} {if !empty($data.title) || !empty($data.description) }two_column{elseif $data.type !='photo'}one_column{/if}">
+            <div class="attachment_left">
+                {if !empty($data.thumbnail_url) }
+                    <a href="{$data.href}" target="_blank">
+                        <img src="{$data.thumbnail_url}" class="attachment_thumb SC_AttachmentImage" />
+                    </a>
+                {elseif !empty($data.url)}
+                <a href="javascript://" onclick="SC.showImageInFloatBox('{$data.href}');">
+                        <img src="{$data.url}" class="attachment_thumb from_fullsize_photo SC_AttachmentImage" />
+                    </a>
+                {elseif !empty($data.html)}
+                    {$data.html}
+                {/if}
+
+                {if !empty($data.allImages) && count($data.allImages) > 1}
+                    <div class="attachment_other_images">
+                        <a href="javascript://" class="attachment_other_images_btn SC_AttachmentSelectPicture sc_lbutton">{text key="base+ajax_attachment_select_image"}</a>
+                        <div style="display: none">
+                            <div class="attachment_other_images_fbtitle SC_AttachmentPicturesFbTitle">{text key="base+ajax_attachment_select_image_title"}</div>
+                            <div class="attachment_other_images_fbcontent clearfix SC_AttachmentPicturesFbContent">
+                                {foreach from=$data.allImages item="img"}
+                                    <div class="attachment_image_item sc_border SC_AttachmentPictureItem">
+                                        <img src="{$img}" />
+                                    </div>
+                                {/foreach}
+                            </div>
+                        </div>
+                    </div>
+                {/if}
+
+            </div>
+            <div class="attachment_right ">
+                {if !empty($data.title)}
+                    <div class="attachment_title"><a href="{$data.href}" target="_blank">{$data.title}</a></div>
+                {elseif $data.type != "photo"}
+                    <div class="attachment_title"><a href="{$data.href}" target="_blank">{$data.href}</a></div>
+                {/if}
+                {if !empty($data.description)}
+                    <div class="attachment_desc sc_remark">{$data.description}</div>
+                {/if}
+            </div>
+        </div>
+    </div>
+</div>
+
+*}
+
+{if $data.type == "photo"}
+<div class="sc_comment_attachment sc_photo_attachment_preview sc_smallmargin" id="{$uniqId}">
+    {if !empty($data.thumbnail_url) }
+    <a href="{$data.href}" target="_blank" class="sc_photo_attachment_pic sc_attachment_preload" style="background-image: url({$data.thumbnail_url});">
+        <div class="sc_attachment_delete sc_miniic_delete SC_AttachmentDelete"></div>
+    </a>
+    {elseif !empty($data.url)}
+    <a href="javascript://" class="sc_photo_attachment_pic sc_attachment_preload" onclick="SC.showImageInFloatBox('{$data.href}');" style="background-image: url({$data.url});">
+        <div class="sc_attachment_delete sc_miniic_delete SC_AttachmentDelete"></div>
+    </a>
+    {/if}
+</div>
+{else}
+<div class="sc_comment_attachment sc_oembed_attachment_preview sc_smallmargin" id="{$uniqId}">
+    {if !empty($data.thumbnail_url) || !empty($data.url)}
+        <div class="sc_oembed_attachment_pic">
+            
+            {if !empty($data.thumbnail_url) }
+                <a href="{$data.href}" target="_blank">
+                    <img src="{$data.thumbnail_url}" class="attachment_thumb SC_AttachmentImage" />
+                </a>
+            {elseif !empty($data.url)}
+                <a href="javascript://" onclick="SC.showImageInFloatBox('{$data.href}');">
+                    <img src="{$data.url}" class="attachment_thumb from_fullsize_photo SC_AttachmentImage" />
+                </a>
+            {/if}
+            
+            {if !empty($data.allImages) && count($data.allImages) > 1}
+                <a href="javascript://" class="attachment_other_images_btn sc_lbutton SC_AttachmentSelectPicture">{text key="base+ajax_attachment_select_image"}</a>
+                
+                <div style="display: none">
+                    <div class="attachment_other_images_fbtitle SC_AttachmentPicturesFbTitle">{text key="base+ajax_attachment_select_image_title"}</div>
+                    <div class="attachment_other_images_fbcontent clearfix SC_AttachmentPicturesFbContent">
+                        {foreach from=$data.allImages item="img"}
+                            <div class="attachment_image_item sc_border SC_AttachmentPictureItem">
+                                <img src="{$img}" />
+                            </div>
+                        {/foreach}
+                    </div>
+                </div>
+            {/if}
+        </div>
+    {/if}
+    
+    <div class="sc_attachment_title">
+        {if !empty($data.title)}
+            <a href="{$data.href}" target="_blank">{$data.title}</a>
+        {/if}
+        <a class="sc_attachment_delete sc_miniic_delete SC_AttachmentDelete" href="javascript://"></a>
+    </div>
+    
+    {if !empty($data.description)}
+        <div class="sc_attachment_description sc_remark">{$data.description}</div>
+    {/if}
+</div>
+{/if}

@@ -1,0 +1,53 @@
+
+{$paging}
+
+<table class="sc_table_2">
+    <tr class="sc_tr_first">
+        <th class="sc_nowrap">{text key='base+billing_transaction_id'}</th>
+        <th>{text key='base+billing_gateway'}</th>
+        <th>{text key='admin+plugin'}</th>
+        <th>{text key='base+billing_details'}</th>
+        <th>{text key='base+billing_amount'}</th>
+        <th>{text key='admin+currency'}</th>
+        <th>{text key='admin+user'}</th>
+        <th>{text key='base+time'}</th>
+    </tr>
+    {foreach from=$list item='sale' name='sale'}
+    <tr class="sc_alt{cycle values='1,2'} {if $smarty.foreach.sale.last}sc_tr_last{/if}">
+        <td>{$sale.transactionUid}</td>
+        <td>
+            {if $sale.gatewayKey != ''}
+                {text key="`$sale.gatewayKey`+gateway_title"}
+            {else}
+                <span class="sc_small sc_remark">{text key='base+billing_gateway_unavailable'}</span>
+            {/if}
+        </td>
+        <td>{$sale.pluginTitle}</td>
+        <td>{$sale.entityDescription}</td>
+        <td>{$sale.totalAmount}</td>
+        <td>{$sale.currency}</td>
+        <td>
+            {if $sale.userId != null}
+                {user_link username=$userNames[$sale.userId] name=$displayNames[$sale.userId]}
+            {else}
+                <span class="sc_small sc_remark">-</span>
+            {/if}
+        </td>
+        <td class="sc_small">{format_date timestamp=$sale.timeStamp}</td>
+    </tr>
+    {/foreach}
+</table>
+
+{$paging}
+
+<div class="sc_supernarrow sc_automargin">
+<table class="sc_table_3">
+<tr class="sc_tr_first"><th class="sc_label" style="text-align: center" colspan="2"><b>{text key='base+billing_statistics'}</b></th></tr>
+{foreach from=$stats item='sum' key='cur'}
+    <tr>
+        <td class="sc_label">{$cur}</td>
+        <td class="sc_value">{$sum}</td>
+    </tr>
+{/foreach}
+</table>
+</div>

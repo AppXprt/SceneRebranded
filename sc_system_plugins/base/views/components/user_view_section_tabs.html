@@ -1,0 +1,14 @@
+
+<table class="sc_table_3 sc_nomargin section_{$sectionName} data_table" {if empty($display)}style="display:none;"{/if}>
+
+    {foreach  from=$questions key='sort' item='question' name='question'}
+        {if isset( $questionsData[$question.name] ) }
+            <tr class="{if $smarty.foreach.question.first}sc_tr_first{/if} {if $smarty.foreach.question.last}sc_tr_last{/if}">
+                <td class="sc_label" style="width: 20%">{if empty($labels[$question.name])}{text key="base+questions_question_`$question.name`_label"}{else}{$labels[$question.name]}{/if}</td>
+                <td class="sc_value"><span class="{if !empty($question.hidden)}sc_field_eye sc_remark profile_hidden_field{/if}">{$questionsData[$question.name]}</span></td>
+            </tr>
+        {/if}
+    {/foreach}
+</table>
+
+

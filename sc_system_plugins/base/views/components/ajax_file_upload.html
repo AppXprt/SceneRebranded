@@ -1,0 +1,40 @@
+<div class="sc_photo_upload_wrap" id="add-new-photo-container">
+    <div class="sc_hidden">
+        <iframe name="iframe_upload" id="iframe_upload" src="about:blank"></iframe>
+        <form id="upload-form" target="iframe_upload" enctype="multipart/form-data" method="post" action="{url_for_route for='admin.ajax_upload'}">
+            <input type="file" name="file" accept="image/jpeg,image/png,image/gif" multiple />
+        </form>
+        <div id="slot-prototype" class="sc_photo_preview_edit">
+            <input type="hidden" name="slot" />
+            <input type="hidden" name="rotate" />
+            <div class="sc_photo_preview_action">
+                <div class="sc_photo_preview_image sc_photo_preview_loading">
+                    <div class="sc_photo_preview_image_filter"></div>
+                </div>
+                <div class="sc_photo_preview_x"></div>
+            </div>
+            <div class="sc_photo_upload_description" style="min-height: 58px">
+                <textarea class="invitation"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="sc_photo_dragndrop">
+        <div id="drop-area" ondragover="return false;"></div>
+        <span id="drop-area-label">{text key="admin+dnd_support"}</span>
+    </div>
+
+    {form name="ajax-upload"}
+        <div id="slot-area" class="sc_photo_preview_block_wrap clearfix"></div>
+
+        <div id="photo-album-form" class="sc_photo_upload_bottom clearfix">
+            <div class="sc_photo_upload_submit sc_right">
+                <span class="sc_button">
+                    <span class=" sc_ic_submit sc_positive">
+                        {submit name="submit"}
+                    </span>
+                </span>
+            </div>
+        </div>
+    {/form}
+</div>

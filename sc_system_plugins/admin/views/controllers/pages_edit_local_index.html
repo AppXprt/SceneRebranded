@@ -1,0 +1,93 @@
+{capture assign="back_url"}{url_for_route for="admin_pages_main"}{/capture}
+
+<div class="sc_stdmargin">{decorator name="button" class="sc_ic_left_arrow" onclick="location.href='`$back_url`';" langLabel="base+pages_back"}</div>
+
+{form name="edit-form"}
+<input id="edit-form-command" type="hidden" name="command" value="save" />
+<table class="sc_form sc_table_1">
+
+    <tr id="title-tr" class="{cycle values="sc_alt2,sc_alt1"} sc_tr_first">
+        <td class="sc_label">
+        	{label name="title"}
+       	</td>
+        <td class="sc_value">
+        	{input name="title"}
+        	<br />{error name="title"}
+        </td>
+        <td></td>
+    </tr>
+
+    <tr id="title-tr" class="{cycle values="sc_alt2,sc_alt1"}">
+        <td class="sc_label">
+        	{label name="name"}
+       	</td>
+        <td class="sc_value">
+        	{input name="name"}
+        	<br />{error name="name"}
+        </td>
+        <td></td>                
+    </tr>
+
+    <tr id="title-tr" class="{cycle values="sc_alt2,sc_alt1"}">
+        <td class="sc_label">
+        	{label name="url"}
+       	</td>
+        <td class="sc_value">
+        	http://yoursite.com/{input name="url" style="width: 200px;margin-left: 6px;"}<br />
+        	<br />{error name="url"}
+        </td>
+        <td></td>                
+      </tr>
+
+    <tr class="{cycle values="sc_alt2,sc_alt1"}" >
+        <td class="sc_label">{label name="visible-for"}</td>
+        <td class="sc_value">
+        	{input name="visible-for"}
+        	<br />{error name="visible-for"}
+       </td>
+        <td></td>       
+    </tr>
+
+    <tr id="title-tr" class="{cycle values="sc_alt2,sc_alt1"} sc_tr_last">
+        <td class="sc_label">
+        	{label name="content"}
+       	</td>
+        <td class="sc_value">
+        	{input name="content"}
+        	<br />{error name="content"}
+        </td>
+        <td class="sc_description sc_small">{desc name="content"}</td>
+    </tr>
+
+    <tr  id="title-tr" class="{cycle values="sc_alt2,sc_alt1"}">
+    <td class="sc_label">
+        {label name="meta_desc"}
+    </td>
+    <td class="sc_value">
+        {input name="meta_desc"}
+        <br />{error name="meta_desc"}
+    </td>
+    <td class="sc_description sc_small" style="width: 30%;">{desc name="meta_desc"}</td>
+    </tr>
+
+    <tr  id="title-tr" class="{cycle values="sc_alt2,sc_alt1"}">
+    <td class="sc_label">
+        {label name="meta_keywords"}
+    </td>
+    <td class="sc_value">
+        {input name="meta_keywords"}
+        <br />{error name="meta_keywords"}
+    </td>
+    <td class="sc_description sc_small" style="width: 30%;">{desc name="meta_keywords"}</td>
+    </tr>
+
+ </table>
+<div class="clearfix sc_stdmargin sc_btn_delimiter">
+    <div class="sc_right">
+        {capture assign="del_js"}if(confirm('{text key='admin+are_you_sure'}')) location.href='{url_for for="ADMIN_CTRL_PagesEditLocal:delete:[id=>`$id`]"}';{/capture}
+        {decorator name="button" class="sc_red sc_ic_delete sc_negative" extraString="onclick=\"`$del_js`\"" langLabel="admin+delete_btn_label"}
+        
+        {submit name="save" class="sc_positive"}
+    </div>
+</div>    
+{/form}

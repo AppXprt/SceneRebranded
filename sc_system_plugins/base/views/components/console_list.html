@@ -1,0 +1,11 @@
+<div class="sc_console_list_wrapper SC_ConsoleListContainer">
+    <div class="sc_nocontent SC_ConsoleListNoContent">{text key='base+no_items'}</div>
+    <ul class="sc_console_list SC_ConsoleList">
+
+    </ul>
+    <div class="sc_preloader_content sc_console_list_preloader SC_ConsoleListPreloader" style="visibility: hidden"></div>
+</div>
+
+{if !empty($viewAll)}
+    <div class="sc_console_view_all_btn_wrap"><a href="{$viewAll.url}" class="sc_console_view_all_btn">{$viewAll.label}</a></div>
+{/if}

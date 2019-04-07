@@ -1,0 +1,46 @@
+
+{block_decorator name="box" type="empty" addClass="sc_superwide sc_automargin"}
+
+    {block_decorator name="box_cap" type="empty" addClass="sc_center" style="padding:15px;" langLabel="base+required_profile_questions"}
+    {/block_decorator}
+
+    {form name=requiredQuestionsForm}
+        <table class="sc_table_1 sc_form sc_stdmargin">
+            {foreach from=$questionArray key='section' item='questions' name='question'}
+
+                {if !empty($section) }
+                    <tr class="sc_tr_first"><th colspan="3">{text key="base+questions_section_`$section`_label"}</th></tr>
+                {/if}
+                
+                {foreach from=$questions item='question' name='question'}
+                    {cycle assign='alt' name=$section values='sc_alt1,sc_alt2'}
+                    <tr class=" {if $smarty.foreach.question.last}sc_tr_last{/if}">
+                        <td class="{$alt} sc_label">
+                            {label name=$question.name}
+                        </td>
+                        <td class="{$alt} sc_value">
+                            {input name=$question.name}
+                            <div style="height:1px;"></div>
+                            {error name=$question.name}
+                        </td>
+                        <td class="{$alt} sc_desc sc_small">
+                            {question_description_lang name=$question.name}
+                        </td>
+                    </tr>
+                {/foreach}
+
+                {if !empty($section)}
+                    {if !$smarty.foreach.question.first}
+                        <tr class="sc_tr_delimiter"><td></td></tr>
+                    {/if}
+                {/if}
+
+            {/foreach}
+        </table>
+        <div class="clearfix sc_stdmargin">
+           <div class="sc_right">
+               {submit name='submit'}
+           </div>
+        </div>
+    {/form}
+{/block_decorator}

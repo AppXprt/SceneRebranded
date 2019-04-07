@@ -1,0 +1,13 @@
+<div class="sc_wide sc_automargin">
+{block_decorator name='box'  addClass='sc_stdmargin' iconClass='sc_ic_plugin' langLabel='admin+manage_plugins_core_update_request_box_cap_label'}
+<div class="sc_center">
+{if !empty($phpVersionInvalidText)}
+   <div class="sc_anno sc_smallmargin sc_nocontent sc_ic_warning">{$phpVersionInvalidText}</div>
+   <div class="sc_txtright"><span class="sc_button sc_critical"><span class=""><input onclick="window.location='{$redirectUrl|escape:javascript}'" type="button" value="{text key='admin+plugin_update_platform_avail_yes_button_label'}"></span></span>{decorator name='button' langLabel='admin+plugin_update_platform_invalid_php_version_back_btn_label' class='sc_ic_right_arrow' onclick="window.location='`$returnUrl`'"}</div>
+{else}
+{$text}
+<div class="clearfix"><div class="sc_right">{decorator name='button' langLabel='admin+plugin_update_yes_button_label' class='sc_positive sc_ic_right_arrow' onclick="window.location='`$redirectUrl`'"}</div></div>
+{/if}
+</div>
+{/block_decorator}
+</div>

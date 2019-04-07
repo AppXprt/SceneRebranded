@@ -1,0 +1,72 @@
+<div class="sc_page_wrap">
+	<div class="sc_menu_fullpage">
+		<div class="sc_menu_fullpage_wrap">{$main_menu}</div>
+	</div>
+	<div class="sc_site_panel clearfix">
+			<a class="sc_logo sc_left" href="{$siteUrl}"></a>
+			<div class="sc_nav_btn"></div>
+			<div class="sc_console_right">
+				{component class='BASE_CMP_Console'}
+			</div>
+			<div class="sc_menu_wrap">{component class='BASE_CMP_MainMenu' responsive=true}</div>
+	</div>
+	<div class="sc_header">
+        <div class="sc_header_pic"></div>
+	</div>
+	{*if isset($imageControlValues.headerImage.src)}
+	<div class="sc_header">
+            <img class="sc_header_img" src="{$imageControlValues.headerImage.src}" />
+            <div class="sc_header_pic"><img class="sc_header_img" src="{$themeImagesUrl}header.jpg" /></div>
+	</div>
+	{/if*}
+	<div class="sc_page_padding">
+		<div class="sc_page_container">
+			<div class="sc_canvas">
+				<div class="sc_page sc_bg_color clearfix">
+					{if !empty($heading)}<h1 class="sc_stdmargin {$heading_icon_class}">{$heading}</h1>{/if}
+					<div class="sc_content">
+						{add_content key='base.add_page_top_content'}
+						{$content}
+						{add_content key='base.add_page_bottom_content'}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="sc_footer">
+	<div class="sc_canvas">
+		<div class="sc_page clearfix">
+			{$bottom_menu}
+			<div class="sc_copyright">
+				{text key='base+copyright'}
+			</div>
+			<div style="float:right;padding-bottom: 30px;">
+				{$bottomPoweredByLink}
+			</div>
+		</div>
+	</div>
+</div>    
+{decorator name='floatbox'}
+<script type="text/javascript">
+	$(window).scroll(function() {
+	var $menuwrappos = $('.sc_menu_wrap').offset().top;
+    if ($(this).scrollTop() > $menuwrappos) { 
+        $('.sc_page_wrap').addClass('sc_hidden_menu');
+    }
+    else {
+    	$('.sc_page_wrap').removeClass('sc_hidden_menu');
+    }
+	});
+	$('.sc_nav_btn').click(function() {
+    	if ($('body').hasClass('sc_menu_active')) {
+    		$('body').removeClass('sc_menu_active');
+    	}
+    	else {
+    		$('body').addClass('sc_menu_active');
+    	}
+    })
+    $('.sc_menu_fullpage_wrap a').click(function() {
+    	$('body').removeClass('sc_menu_active');
+    })
+</script>

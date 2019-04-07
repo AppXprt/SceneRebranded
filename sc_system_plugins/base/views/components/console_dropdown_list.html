@@ -1,0 +1,7 @@
+<a href="javascript://" class="sc_console_item_link">{$label}</a>
+
+<span {if empty($counter.number)}style="display: none;"{/if} class="sc_count_wrap SC_ConsoleItemCounter" >
+    <span class="{if $counter.active}sc_count_active{/if} sc_count_bg SC_ConsoleItemCounterPlace">
+        <span class="sc_count SC_ConsoleItemCounterNumber" {if empty($counter.number)}style="visibility: hidden;"{/if}>{$counter.number}</span>
+    </span>
+</span>

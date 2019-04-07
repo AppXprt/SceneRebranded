@@ -1,0 +1,188 @@
+{style}
+    #console-notifications-wrapper {
+        position: absolute; 
+        z-index: 100; 
+        display: block;
+    }
+
+    #console-notifications-wrapper .console_tooltip {
+        opacity: 1; 
+        top: 22px !important; 
+        display: none;
+    }
+
+    #console-notifications-wrapper .sc_count_wrap {
+        width: auto;
+    }
+
+    #console-notifications-wrapper .sc_count_wrap .sc_count {
+        right: 0px;
+    }
+    
+    #console-notifications-wrapper .sc_console_list li {
+        margin: 0 0 4px;
+        border: 1px solid #ececec;
+        border-radius: 2px;
+    }
+
+    .sc_footer .sc_canvas .sc_page {
+        padding: 20px 0;
+    }
+
+    .sc_footer .sc_canvas .sc_page .sc_remark_wrapper{
+        float:left;
+    }
+
+    .sc_footer .sc_canvas .sc_page .sc_powered_by{
+        float:right;
+        line-height:15px;
+        font-size:11px;
+    }
+{/style}
+
+<div class="sc_admin_page_wrap">
+    <div class="sc_admin_page_padding">
+        <!-- head wrapper -->
+        <div class="sc_header sc_admin_header clearfix">
+            {component class='BASE_CMP_Console'}
+            <div class="sc_site_panel clearfix">
+                <a class="sc_admin_home_btn sc_admin_menu_item home sc_left" href="{$siteUrl}">
+                    <span class="sc_admin_menu_item_label">{$siteName}</span>
+                </a>
+                {add_content key='admin.site_panel_left_content'}
+                <div class="sc_admin_console_update">
+                    <a id="admin_console_update_link" class="sc_admin_console_update_link" href="#"></a>
+                    {if !empty($notifications)}           
+                        <span class="sc_count_wrap">
+                            <span class="sc_count_bg">
+                                <span class="sc_count sc_count_active">{count($notifications)}</span>
+                            </span>
+                        </span>
+                    {/if}
+                    <div id="console-notifications-wrapper" class="SC_ConsoleItemContent">
+                        {block_decorator name="tooltip" addClass="console_tooltip sc_tooltip_top_left"}
+                            <div class="sc_console_list_wrapper">
+                                {if !empty($notifications)}
+                                    <ul class="sc_console_list">
+                                        {foreach from=$notifications item='notification'}
+                                            <li class="sc_console_list_item sc_admin_config_item sc_admin_console_type_{$notification.type}">
+                                                <div class="sc_admin_notification_pic"></div>
+                                                <div class="sc_admin_notification_text sc_left sc_small">{$notification.message}</div>
+                                            </li>
+                                        {/foreach}
+                                    </ul>
+                                {else}
+                                    <div class="sc_nocontent">{text key="base+no_items"}</div>
+                                {/if}
+                            </div>
+                            <div class="sc_console_tooltip_btns clearfix">
+                                <div class="sc_console_tooltip_btn_wrap sc_loadig"><a href="{$checkUpdatesUrl}">{text key="admin+check_updates"}</a></div>
+                            </div>
+                        {/block_decorator}
+                    </div>
+                </div>
+                {add_content key='admin.site_panel_right_content'}
+            </div>
+        </div>
+        <!-- end of head wrapper -->
+
+        <!-- left menu wrapper -->
+        <div id="main_left_menu" class="sc_admin_menu_wrap sticky">
+            <div class="sc_admin_menu">
+                {foreach from=$menuArr key='key' item='item'}
+                    <div class="sc_admin_menu_item {$item.key}{if $item.isActive} active{/if}">
+                        <a href="{$item.firstLink}" class="sc_admin_menu_item_label">{$item.label}</a>
+                        <div class="sc_admin_menu_arrow"></div>
+                        {$item.sub_menu}
+                    </div>
+                    {if $item.isActive}
+                        {$item.active_sub_menu}
+                    {/if}
+                {/foreach}
+            </div>
+        </div>
+        <!-- end of left menu wrapper -->
+
+        <!-- content wrapper -->
+        <div class="sc_page_container sc_admin ">
+            <div class="sc_canvas">
+                <div class="sc_page">
+                    {if !empty($heading)}
+                        <h1 class="sc_stdmargin {$heading_icon_class}">
+                            {$heading}
+                        </h1>
+                    {/if}
+                    <div class="sc_content">
+                        {add_content key='admin.add_page_top_content'}
+                            {$content}
+                        {add_content key='admin.add_page_bottom_content'}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of content wrapper -->
+    </div>
+</div>
+<!-- footer wrapper -->
+<div class="sc_footer sc_admin">
+    <div class="sc_canvas">
+        <div class="sc_page clearfix">
+            <div class="sc_remark_wrapper">
+                {if empty($sc_plugin_xp)}
+                    <div class="sc_right sc_small sc_remark">{$softVersion}</div>
+                {/if}
+            </div>
+            <div class="sc_powered_by">
+                {$bottomPoweredByLink}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of footer wrapper -->
+
+{decorator name='floatbox'}
+
+{script}
+    // process main menu height
+    var $mainLeftMenu = $("#main_left_menu > .sc_admin_menu");
+    if ( $mainLeftMenu.innerHeight() > $(window).innerHeight() ) {
+        $mainLeftMenu.parent().removeClass("sticky");
+    }
+
+    $(document).ready(function(){
+        // console
+        var $tooltip = $("#console-notifications-wrapper .sc_tooltip");
+        var $consoleLink = $("#admin_console_update_link");
+
+        $consoleLink.on("click", function(e) 
+        {
+            e.preventDefault();
+
+            // show the notifications
+            if (!$tooltip.hasClass("active")) {
+                $tooltip.addClass("active").show();
+                SC.addScroll("#console-notifications-wrapper .sc_console_list_wrapper");
+
+                return;
+            }
+
+            // hide the notifications
+            $tooltip.removeClass("active").hide();
+            SC.removeScroll("#console-notifications-wrapper .sc_console_list_wrapper");
+        });
+
+        $(document).mouseup(function(e)
+        {
+            if ($(e.target).parents("#console-notifications-wrapper").length 
+                    || $consoleLink.is(e.target)) {
+
+                return;
+            }
+
+            if ($tooltip.is(":visible")) {
+                $tooltip.removeClass("active").hide();
+                SC.removeScroll("#console-notifications-wrapper .sc_console_list_wrapper");
+            }
+        });
+    });
+{/script}

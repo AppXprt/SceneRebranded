@@ -1,0 +1,221 @@
+
+{style}{literal}
+    .hidden-placeholder {
+        display: none;
+    }
+
+    .dd_handle {
+       cursor: move;
+    }
+
+    .component .action {
+           display: none;
+    }
+
+    .component .action .dd_delete {
+           display: none;
+    }
+
+    #place_components .clone .action .dd_delete {
+           display: inline-block;
+    }
+
+    .component .action {
+           display: none;
+    }
+
+    #place_components .component {
+        float: left;
+    }
+
+    .place_section .component {
+
+    }
+
+    .place_section {
+       min-height: 60px;
+       padding-top: 10px;
+    }
+
+	.access_member .sc_dnd_schem_item {
+	    background-color: #AAFFAA;
+	}
+
+	.access_guest .sc_dnd_schem_item {
+	    background-color: #FFAAAA;
+	}
+
+    .sc_dragndrop_panel .sc_dnd_schem_item{
+       width: 166px;
+    }
+
+    .sc_dnd_locked_section {
+        opacity: 0.5;
+        filter: alpha(opacity=50)
+    }
+
+    .sc_dnd_locked_section .sc_dnd_placeholder {
+        display: none;
+    }
+
+    .add_btn_cont {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+
+{/literal}{/style}
+
+{add_content key='base.widget_panel_customize.content.top' placeName=$placeName}
+{add_content key='base.`$placeName`_customize.content.top'}
+
+{capture name="sidebar"}
+    <div class="sc_sidebar">
+        <div class="sc_highbox place_section sidebar_section" sc_place_section="sidebar">
+            {if isset($componentList.section.sidebar)}
+                {foreach from=$componentList.section.sidebar item="component"}
+                    {dd_component uniqName=$component.uniqName render=true}
+                {/foreach}
+            {/if}
+        </div>
+    </div>
+{/capture}
+
+
+ <div style="display: none" id="fb_settings">
+     <div class="settings_title">
+        {text key="base+widgets_fb_setting_box_title"}
+     </div>
+     <div class="settings_content component_settings" style="min-height: 300px;"></div>
+     <div class="settings_controls component_controls">
+		<div class="clearfix">
+			<div class="sc_right">{decorator name="button" class="dd_save sc_ic_save" langLabel="base+edit_button"}</div>
+		</div>
+     </div>
+ </div>
+
+{block_decorator name='box' addClass='sc_highbox sc_stdmargin index_customize_box'}
+
+    <div class="sc_center" style="position: relative;">
+        {decorator name='button' langLabel='base+widgets_finish_customize_btn' class='sc_ic_ok' id="goto_normal_btn"}
+        <div class="add_btn_cont">
+            <form style="display: inline;">
+                {if $disableJs}
+                    <input type="hidden" name="disable-js" value="0" />
+                    {decorator name='button' type="submit" langLabel='base+widgets_enable_js' class='sc_ic_unlock sc_mild_green'}
+                {else}
+                    <input type="hidden" name="disable-js" value="1" />
+                    {decorator name='button' type="submit" langLabel='base+widgets_disable_js' class='sc_ic_restrict sc_mild_green'}
+                {/if}
+            </form>
+        </div>
+    </div>
+
+    <div class="sc_dragndrop_panel">
+
+        {block_decorator name='box' iconClass='sc_ic_add' langLabel='base+widgets_section_box_title' addClass='sc_smallmargin'}
+
+        <p>
+            {text key="base+widgets_avaliable_description" pluginsUrl=$adminPluginsUrl}
+        </p>
+        <p>
+            {text key="base+widgets_avaliable_legend"}
+        </p>
+
+        <div class="clearfix">
+            <div class="sc_dnd_content_components sc_left clearfix" id="place_components">
+                {foreach from=$componentList.place item="component"}
+                    {dd_component uniqName=$component.uniqName}
+                {/foreach}
+           </div>
+           <div class="sc_dnd_clonable_components sc_right" id="clonable_components">
+                {foreach from=$componentList.clonable item="component"}
+                    {dd_component uniqName=$component.uniqName}
+                {/foreach}
+           </div>
+        </div>
+
+        {/block_decorator}
+    </div>
+
+{/block_decorator}
+
+
+
+<div class="sc_dragndrop_sections sc_stdmargin" id="place_sections">
+
+    <div class="clearfix">
+
+
+        {if $sidebarPosition == 'left'}
+            {$smarty.capture.sidebar}
+        {/if}
+
+        <div class="sc_dragndrop_content">
+
+            <div class="sc_highbox place_section top_section" sc_place_section="top">
+
+                {if isset($componentList.section.top)}
+                    {foreach from=$componentList.section.top item="component"}
+                        {dd_component uniqName=$component.uniqName render=true}
+                    {/foreach}
+                {/if}
+
+            </div>
+
+            <div class="sc_dnd_slider" >
+                <div class="sc_dnd_slider_handle sc_ic_move_horizontal"></div>
+                {foreach from=$schemeList item=scheme}
+                    <div class="sc_dnd_slider_item clearfix">
+                        <div class="sc_dnd_slider_pusher {$scheme->leftCssClass}"></div>
+                        <div class="sc_dnd_slider_marker{if $activeScheme.id == $scheme->id} current{/if}"
+                           sc_scheme="{$scheme->id}" dd_leftclass="{$scheme->leftCssClass}" dd_rightclass="{$scheme->rightCssClass}" >
+                        </div>
+                    </div>
+                {/foreach}
+            </div>
+
+             <div class="clearfix" style="overflow: hidden;">
+
+                <div class="sc_left sc_highbox place_section sc_column_equal_fix left_section {if isset($activeScheme.leftCssClass)}{$activeScheme.leftCssClass}{/if}" sc_scheme_class="{if isset($activeScheme.leftCssClass)}{$activeScheme.leftCssClass}{/if}"  sc_place_section="left">
+
+                    {if isset($componentList.section.left)}
+                        {foreach from=$componentList.section.left item="component"}
+                            {dd_component uniqName=$component.uniqName render=true}
+                        {/foreach}
+                    {/if}
+
+                </div>
+
+                <div class="sc_right sc_highbox place_section sc_column_equal_fix right_section {if isset($activeScheme.rightCssClass)}{$activeScheme.rightCssClass}{/if}" sc_scheme_class="{if isset($activeScheme.rightCssClass)}{$activeScheme.rightCssClass}{/if}"  sc_place_section="right">
+
+                    {if isset($componentList.section.right)}
+                        {foreach from=$componentList.section.right item="component"}
+                            {dd_component uniqName=$component.uniqName render=true}
+                        {/foreach}
+                    {/if}
+
+                </div>
+
+             </div>
+
+            <div class="sc_highbox place_section bottom_section" sc_place_section="bottom">
+
+                {if isset($componentList.section.bottom)}
+                    {foreach from=$componentList.section.bottom item="component"}
+                        {dd_component uniqName=$component.uniqName render=true}
+                    {/foreach}
+                {/if}
+
+            </div>
+
+        </div>
+        {if $sidebarPosition == 'right'}
+	        {$smarty.capture.sidebar}
+	    {/if}
+
+    </div>
+</div>
+
+{add_content key='base.widget_panel_customize.content.bottom' placeName=$placeName}
+{add_content key='base.`$placeName`_customize.content.bottom'}

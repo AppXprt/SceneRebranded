@@ -1,0 +1,7 @@
+<ul class="sc_regular">
+    {foreach from=$items item="item"}
+        <li>
+            <a href="{$item.url}">{$item.label}</a> <span class="sc_lbutton sc_green">{$item.count}</span>
+        </li>
+    {/foreach}
+</ul>

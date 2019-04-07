@@ -1,0 +1,96 @@
+{form name='configSaveForm'}
+    <table class="sc_table_1 sc_form">
+        <tr class="sc_tr_first">
+            <th class="sc_name sc_txtleft" colspan="3">
+                <span class="sc_section_icon sc_ic_script">{text key='admin+site_installation'}</span>
+            </th>
+        </tr>
+        <tr class="{cycle name="install" values="sc_alt1,sc_alt2"}">
+            <td class="sc_label">{text key='admin+site_title'}</td>
+            <td class="sc_value">{input name='siteTitle'} {error name='siteTitle'}</td>
+            <td class="sc_desc"></td>
+        </tr>
+        <tr class="{cycle name="install" values="sc_alt1,sc_alt2"}">
+            <td class="sc_label">{text key='admin+site_email'}</td>
+            {if $showVerifyButton}
+                <td class="sc_value">{input style="width:60%;" name='siteEmail'} {decorator name="button" class='sc_ic_mail' id="verify_site_email_button" langLabel='admin+verify_site_email'} {error name='siteEmail'}</td>
+            {else}
+                <td class="sc_value">{input name='siteEmail'} {error name='siteEmail'}</td>
+            {/if}
+            <td class="sc_desc">{text key='admin+site_email_desc'}</td>
+        </tr>
+        <tr class="{cycle name="install" values="sc_alt1,sc_alt2"}">
+            <td class="sc_label">{text key='admin+site_tagline'}</td>
+            <td class="sc_value">{input name='tagline'} {error name='tagline'}</td>
+            <td class="sc_desc sc_small">{text key='admin+site_tagline_desc'}</td>
+        </tr>
+        <tr class="{cycle name="install" values="sc_alt1,sc_alt2"} sc_tr_last">
+            <td class="sc_label">{text key='admin+site_description'}</td>
+            <td class="sc_value">{input name='description'} {error name='description'}</td>
+            <td class="sc_desc sc_small">{text key='admin+site_description_desc'}</td>
+        </tr>
+        <tr class="sc_tr_delimiter"><td></td></tr>
+        <tr class="sc_tr_first">
+            <th class="sc_name sc_txtleft" colspan="3">
+                <span class="sc_section_icon sc_ic_script">{text key='admin+captcha_settings'}</span>
+            </th>
+        </tr>
+        <tr class="{cycle name="install" values="sc_alt1,sc_alt2"}">
+            <td class="sc_label">{text key='admin+display_captcha_label'}</td>
+            <td class="sc_value">{input name='enableCaptcha'} {error name='enableCaptcha'}</td>
+            <td class="sc_desc"></td>
+        </tr>
+        <tr class="sc_tr_delimiter"><td></td></tr>
+        <tr class="sc_tr_first">
+            <th class="sc_name sc_txtleft" colspan="3">
+                <span class="sc_section_icon sc_ic_clock">{text key='admin+time_settings'}</span>
+            </th>
+        </tr>
+        <tr class="{cycle name="time" values="sc_alt1,sc_alt2"}">
+            <td class="sc_label">{label name='dateFieldFormat'}</td>
+            <td class="sc_value">{input name='dateFieldFormat'} {error name='dateFieldFormat'}</td>
+            <td class="sc_desc sc_small"></td>
+        </tr>
+        <tr class="{cycle name="time" values="sc_alt1,sc_alt2"}">
+            <td class="sc_label">{text key='admin+timezone'}</td>
+            <td class="sc_value">{input name='timezone'} {error name='timezone'}</td>
+            <td class="sc_desc"></td>
+        </tr>
+        <tr class="{cycle name="time" values="sc_alt1,sc_alt2"}">
+            <td class="sc_label">{text key='admin+use_relative_time'}</td>
+            <td class="sc_value">{input name='relativeTime'} {error name='relativeTime'}</td>
+            <td class="sc_desc sc_small">{text key='admin+site_relative_time_desc'}</td>
+        </tr>
+        <tr class="{cycle name="time" values="sc_alt1,sc_alt2"} sc_tr_last">
+            <td class="sc_label">{text key='admin+use_military_time'}</td>
+            <td class="sc_value">{input name='militaryTime'}</td>
+            <td class="sc_desc sc_small"></td>
+        </tr>
+        <tr class="sc_tr_delimiter"><td></td></tr>
+        <tr class="sc_tr_first">
+            <th class="sc_name sc_txtleft" colspan="3">
+                <span class="sc_section_icon sc_ic_app">{text key='admin+finance_settings'}</span>
+            </th>
+        </tr>
+        <tr class="{cycle name="time" values="sc_alt1,sc_alt2"}">
+            <td class="sc_label">{label name='currency'}</td>
+            <td class="sc_value">{input name='currency'} <br />{error name='currency'}</td>
+            <td class="sc_desc sc_small"></td>
+        </tr>
+
+    </table>
+    <div class="clearfix sc_stdmargin"><div class="sc_right">{submit name='save' class='sc_ic_save sc_positive'}</div></div>
+{/form}
+{if $showVerifyButton}
+    <div style="display:none;">
+        <div id="site-email-verify">
+            {block_decorator name="box" type="empty" addClass="sc_automargin" style="width:325px;padding-bottom:10px;"}
+                {text key="admin+site_email_verify_promo"}
+            {/block_decorator}
+            {block_decorator name="box" type="normal" addClass="sc_stdmargin sc_wide sc_automargin sc_center"}
+                {decorator name="button" class='sc_ic_mail' id="sendVerifyMail" langLabel='admin+send_verification_email'}
+            {/block_decorator}
+        </div>
+    </div>
+{/if}
+

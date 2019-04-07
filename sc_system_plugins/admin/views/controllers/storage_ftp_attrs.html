@@ -1,0 +1,35 @@
+{style}
+{literal}
+.sc_active_plugins tr, .sc_inactive_plugins tr{
+    border-top:1px solid #ccc;
+}
+.sc_plugin_controls{
+    display:none;
+}
+{/literal}
+{/style}
+<div class="sc_narrow sc_automargin" >
+{block_decorator name='box' type='empty' addClass='sc_stdmargin' iconClass='sc_ic_trash' langLabel='admin+manage_plugins_ftp_box_cap_label'}
+{form name='ftp'}
+<table class="sc_form sc_smallmargin">
+       <tr>
+           <td class="sc_label">{label name='host'}</td>
+           <td class="sc_input">{input name='host'}</td>
+       </tr>
+       <tr>
+           <td class="sc_label">{label name='login'}</td>
+           <td class="sc_input">{input name='login'}</td>
+       </tr>
+       <tr>
+           <td class="sc_label">{label name='password'}</td>
+           <td class="sc_input">{input name='password'}</td>
+       </tr>
+       <tr>
+           <td class="sc_label">{label name='port'}</td>
+           <td class="sc_input">{input name='port'}</td>
+       </tr>
+   </table>
+   <div class="clearfix"><div class="sc_right">{submit name='submit' class='sc_positive'}</div></div>
+{/form}
+{/block_decorator}
+</div>

@@ -1,0 +1,25 @@
+<div class="sc_profile_gallery_action_toolbar sc_profile_action_toolbar_wrap clearfix sc_stdmargin">
+    <ul class="sc_bl sc_profile_action_toolbar clearfix sc_small sc_left">
+        {foreach from=$toolbar item='action'}
+            {if isset($action.html)}
+                {$action.html}
+            {elseif isset($action.extraLabel)}
+                <li>
+                    {$action.extraLabel}
+                </li>
+            {else}
+                <li>
+                    <a {$action.attrs} >
+                        {$action.label}
+                    </a>
+                </li>
+            {/if}
+        {/foreach}
+    </ul>
+
+    {foreach from=$groups item="group"}
+        {$group}
+    {/foreach}
+
+    {$cmpsMarkup}
+</div>

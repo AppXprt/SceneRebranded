@@ -1,0 +1,123 @@
+{style}
+    .anno_padding_left {
+        padding-left:45px;
+    }
+{/style}
+{literal}
+<script language="javascript" type="text/javascript">
+    $(function(){
+        $(".unregister_profile_button").click(
+            function() { window.location = {/literal}"{$unregisterProfileUrl}"{literal} }
+        );
+   });
+</script>
+{/literal}
+
+{if !empty($changePassword) }
+    {block_decorator name="box" type="empty" addClass="sc_superwide sc_automargin" }
+        <div class="clearfix sc_stdmargin"><div class="sc_right">{$changePassword}</div></div>
+    {/block_decorator}
+{/if}
+
+{block_decorator name="box" type="empty" addClass="sc_superwide sc_automargin"}
+{if isset($editSynchronizeHook)}
+    {block_decorator name="box" addClass="sc_center" iconClass='sc_ic_update' langLabel='base+edit_remote_field_synchronize_title' style="overflow:hidden;"}
+       {foreach from=$editSynchronizeHook item='item'}
+          {$item}
+       {/foreach}
+    {/block_decorator}
+    {block_decorator name="box" type="empty" addClass="sc_center" style="padding:15px;"}
+        {text key="base+join_or"}
+    {/block_decorator}
+{/if}
+
+{form name=editForm}
+    <table class="sc_table_1 sc_form sc_stdmargin">
+        {if $displayAccountType}
+            <tr class="sc_alt1 sc_tr_first">
+                <td class="sc_label">
+                    {label name='accountType'}
+                </td>
+                <td class="sc_value">
+                    {input name='accountType'}
+                    <div style="height:1px;"></div>
+                    {error name='accountType'}
+                </td>
+                <td class="sc_desc sc_small">
+
+                </td>
+            </tr>
+        {/if}
+        <tr class="sc_tr_delimiter"><td></td></tr>
+        {foreach from=$questionArray key='section' item='questions' name='question'}
+            {if !empty($section) }
+                <tr class="sc_tr_first"><th colspan="3">{text key="base+questions_section_`$section`_label"}</th></tr>
+            {/if}
+            
+            {foreach from=$questions item='question' name='question'}
+                {cycle assign='alt' name=$section values='sc_alt1,sc_alt2'}
+                <tr class=" {if $smarty.foreach.question.last}sc_tr_last{/if} {if !empty($changeList[$question.name]) && $adminMode } sc_premoderation_high {/if}">
+                    <td class="{$alt} sc_label">
+                        {label name=$question.name}
+                    </td>
+                    <td class="{$alt} sc_value">
+                        {input name=$question.name}
+                        <div style="height:1px;"></div>
+                        {error name=$question.name}
+                    </td>
+                    <td class="{$alt} sc_desc sc_small">
+                        {question_description_lang name=$question.name}
+                    </td>
+                </tr>
+            {/foreach}
+            {if !empty($section)}{if !$smarty.foreach.question.first}
+            <tr class="sc_tr_delimiter"><td></td></tr>
+            {/if}
+            {/if}
+        {/foreach}
+        <tr class="sc_tr_delimiter"><td></td></tr>
+        <tr class="sc_tr_first">
+            <th colspan="3">{text key='base+questions_section_user_photo_label'}</th>
+        </tr>
+        <tr>
+            <td class="sc_alt1 sc_label">
+                {label name='avatar'}
+            </td>
+            <td class="sc_alt1 sc_value">
+                {input name='avatar'}
+                {error name='avatar'}
+            </td>
+            <td class="sc_alt1 sc_desc sc_small"></td>
+        </tr>
+    </table>
+
+    {if !$adminMode && !$isAdmin && $approveEnabled}
+        <div class="sc_anno sc_std_margin anno_padding_left">{text key="base+edit_profile_warning"}</div>
+    {/if}
+
+	<div class="clearfix sc_stdmargin{if !$isAdmin} sc_btn_delimiter{/if}">
+           {if $adminMode}
+                {if !$isUserApproved && !$isEditedUserModerator}
+                    {decorator name="button" class="delete_user_by_moderator sc_ic_delete sc_red sc_negative" langLabel='base+delete_profile'}
+                {/if}
+
+                <div class="sc_right">
+                    {if !$isUserApproved}
+                        {decorator name="button" class="write_message_button sc_green sc_positive" langLabel='base+write_message'}
+                        {submit name='saveAndApprove'}
+                    {else}
+                        {submit name='editSubmit'}
+                    {/if}
+                </div>
+           {else}
+                 {if !$isAdmin}
+                    {decorator name="button" class="unregister_profile_button sc_ic_delete sc_red sc_negative" langLabel='base+delete_profile'}
+                 {/if}
+                 <div class="sc_right">
+                    {submit name='editSubmit'}
+                 </div>
+		   {/if}
+
+    </div>
+{/form}
+{/block_decorator}

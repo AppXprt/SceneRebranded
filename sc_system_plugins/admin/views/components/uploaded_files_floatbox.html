@@ -1,0 +1,52 @@
+<div class="sc_hidden">
+    <div id="ow-photo-view" class="sc_photoview_wrap clearfix sc_bg_color">
+        {if !empty($authError)}
+        <div id="ow-photo-view-error" style="padding: 45px 10px 65px">
+            <div class="sc_anno sc_nocontent">{$authError}</div>
+        </div>
+        {else}
+        <div class="sc_photoview_stage_wrap">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" class="sc_photo_img sc_photo_view" />
+            <div class="sc_photo_context_action" style="display: none"></div>
+            <a class="sc_photoview_arrsc_left" href="javascript://"><i></i></a>
+            <a class="sc_photoview_arrsc_right" href="javascript://"><i></i></a>
+        </div>
+        <div class="sc_photoview_info_wrap">
+            <div class="sc_photoview_info">
+                <div class="sc_photo_scroll_cont">
+                    <input type="hidden" class="sc_photoview_id" name="photo_id" />
+                    <div class="sc_photoview_title sc_small sc_smallmargin">
+                        <h5>{text key="admin+title"}:</h5>
+                        <input type="text" name="title" />
+                    </div>
+
+                    <div class="sc_photoview_url sc_small sc_smallmargin">
+                        <h5>{text key="admin+url"}:</h5>
+                        <input type="text" name="url" disabled="disabled" class="sc_disabled" />
+                        <a href="#">Copy</a>
+                    </div>
+
+                    <div class="sc_photoview_date sc_small">
+                        {text key="admin+date"}: <b><span id="photo-date"></span></b>
+                    </div>
+                    <div class="sc_photoview_size sc_small">
+                        {text key="admin+size"}: <b><span id="photo-size"></span></b>
+                    </div>
+                    <div class="sc_photoview_filesize sc_small">
+                        {text key="admin+filesize"}: <b><span id="photo-filesize"></span></b>
+                    </div>
+
+                    <div class="sc_photoview_save sc_small sc_right">
+                        <span class="sc_button">
+                            <span class=" sc_positive sc_btn_delimiter">
+                                <input type="submit" name="save" value="Save" class="sc_positive sc_btn_delimiter image_save_data" name="submit" />
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="sc_feed_comments_input_sticky"></div>
+        </div>
+        {/if}
+    </div>
+</div>

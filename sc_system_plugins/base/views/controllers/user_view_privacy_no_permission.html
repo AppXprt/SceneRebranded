@@ -1,0 +1,28 @@
+{style}{literal}
+    .sc_avatar_console .sc_avatar_label {
+        bottom: 5px;
+        right: 5px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+    }
+{/literal}{/style}
+
+{if isset($profileActionToolbar)}
+{$profileActionToolbar}
+{/if}
+
+<div class="sc_left sc_supernarrow">
+    <div style="" class="sc_box_empty sc_stdmargin clearfix">
+        <div id="avatar-console" class="sc_avatar_console sc_center">
+            <div style="height: {$avatarSize}px; background: url({$avatar}) no-repeat center center; width: 100%">
+                {if isset($role.label)}<span class="sc_avatar_label"{if isset($role.custom)} style="background-color: {$role.custom}"{/if}>{$role.label}</span>{/if}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sc_right sc_superwide">
+    <div class="sc_anno sc_center">
+        {if !empty($message)}{$message}{else}{text key='privacy+no_permission_message'}{/if}
+    </div>
+</div>

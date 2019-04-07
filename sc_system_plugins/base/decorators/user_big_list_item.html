@@ -1,0 +1,28 @@
+<div class="sc_ulist_big_item">
+    <div class="sc_ulist_big_item_cont">
+        <div style="background-image: url('{$data.avatar}');" class="sc_ulist_big_avatar">
+            {if !empty($data.isMarked)}
+                <div class="sc_ic_bookmark sc_bookmark_icon"></div>
+            {/if}
+            
+            {if !empty($data.online)}
+                <div class="sc_miniic_live"><span class="sc_live_on"></span></div>
+            {/if}
+            
+            <a href="{url_for_route for="base_user_profile:[username=>`$data.username`]"}" class="sc_ulist_big_avatar_shadow"></a>
+            
+            {if !empty($data.avatarAction)}
+                <a {if !empty($data.avatarAction.userId)}data-user-id="{$data.avatarAction.userId}" {/if}class="sc_ulist_big_avatar_bookmark" href="{$data.avatarAction.href}">{$data.avatarAction.label}</a>
+            {/if}
+        </div>
+        <div class="sc_ulist_big_info">
+            <div class="clearfix">
+                <a class="sc_ulist_big_info_name sc_small" href="{url_for_route for="base_user_profile:[username=>`$data.username`]"}">{$data.displayName}</a>
+            </div>
+            {$data.fields}
+            {if !empty($data.activity)}
+                {$data.activity}
+            {/if}
+        </div> 
+    </div>
+</div>

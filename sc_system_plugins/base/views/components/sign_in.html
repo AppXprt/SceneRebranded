@@ -1,0 +1,33 @@
+<div class="sc_sign_in_wrap">
+<h2>{$siteName}</h2>
+{form name='sign-in'}
+     <div class="clearfix">
+        <div class="sc_sign_in">
+            {block_decorator name='box' langLabel='base+base_sign_in_cap_label'}
+
+                <div class="sc_user_name">
+                    {input name='identity'}
+                </div>
+                <div class="sc_password">
+                    {input name='password'}
+                </div>
+                <div class="sc_form_options clearfix">
+                    <div class="sc_right">
+                        {submit name='submit' class='sc_positive'}
+                    </div>
+                    <p class="sc_remember_me">{input name='remember'}{label name='remember'}</p>
+                    <p class="sc_forgot_pass"><a href="{url_for_route for='base_forgot_password'}">{text key='base+forgot_password_label'}</a></p>
+                </div>
+            {/block_decorator}
+            <div class="sc_connect_buttons">
+                {component class='BASE_CMP_SignInButtonList'}
+            </div>
+        </div>
+        <div class="sc_sign_up">
+            <p>{text key='base+base_sign_in_txt'}</p>
+            <hr>
+            <p>{*text key='base+base_sign_in_or_label'*} <a href="{$joinUrl}">{text key='base+join_submit_button_join'}</a></p>
+        </div>
+     </div>
+{/form}
+</div>

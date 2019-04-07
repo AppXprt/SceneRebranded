@@ -1,0 +1,18 @@
+{form name="give-role"}
+<table class="sc_table_2 sc_form sc_stdmargin sc_center">
+<tr class="sc_tr_first">
+	<th></th>
+	<th>User Role</th>
+</th>
+{foreach from=$list item='role' name='role'}
+<tr class="{cycle values='sc_alt1, sc_alt2'} {if $smarty.foreach.role.last}sc_tr_last{/if}">
+	<td>{input name="roles[`$role->id`]"}</td>
+	<td>{label name="roles[`$role->id`]"}</td>
+</tr>
+{/foreach}
+</table>
+
+	<div class="clearfix sc_smallmargin"><div class="sc_right">
+		{submit name="submit"}
+	</div></div>	
+{/form}

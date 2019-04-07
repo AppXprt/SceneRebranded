@@ -1,0 +1,16 @@
+{*<table class="sc_table_1 sc_smallmargin sc_small sc_alt1">
+    <tbody>
+        <tr class="sc_tr_first sc_tr_last">
+            <td><p class="sc_nowrap">{text key="base+sort_control_sortby"}:</p></td>
+            <td class="sort_link">
+                <ul>
+                    {foreach from=$itemList item='item'}
+                        <li {if $item.isActive}class="active"{/if} ><a href="{$item.url}">{$item.label}</a></li>
+                    {/foreach}
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>*}
+<div class="sc_sort_control sc_smallmargin sc_small sc_alt2"><span class="sc_sort_control_label">{text key="base+sort_control_sortby"}:</span>{foreach from=$itemList item='item'}<a href="{$item.url}" {if $item.isActive}class="active"{/if}><span>{$item.label}</span></a>{/foreach}
+</div>

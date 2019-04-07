@@ -1,0 +1,32 @@
+{* `IC` decorator template *}
+{style}
+{literal}
+.sc_ic_toolbar span{
+    display:inline-block;
+}
+{/literal}
+{/style}
+{if $data.first}
+	<ul class="sc_regular sc_ic">
+{/if}
+
+<li>
+	<div class="sc_ic_header"><a {if !empty($data.titleHrefBlank)}target="_blank"{/if} href="{$data.titleHref}">{$data.title}</a></div>
+
+	<div class="sc_ic_description">{$data.info}</div>
+
+	{if !empty($data.toolbar)}
+  		<div class="sc_ic_toolbar sc_small sc_remark clearfix">
+  		{foreach from=$data.toolbar item='item' name='toolbar'}
+            {if !$smarty.foreach.toolbar.first && ( empty($item.class) || $item.class != 'sc_ipc_date' )} <span class="sc_delimiter">&middot;</span> {/if}
+  		    <span class="sc_nowrap{if !empty($item.class)} {$item.class}{/if}">
+                {if !empty($item.href)}<a {if !empty($item.id)} id="{$item.id}"{/if} href="{$item.href}">{/if}{$item.label}{if !empty($item.href)}</a>{/if}
+  		    </span>
+  		{/foreach}
+  		</div>
+    {/if}
+</li>
+
+{if $data.last}
+	</ul>
+{/if}
